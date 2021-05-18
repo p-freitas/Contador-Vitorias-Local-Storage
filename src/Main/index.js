@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./main.css";
+import moment from "moment";
 
 import Smash from "../assets/UltimateLogoEN.png";
 import Github from "../assets/github.png";
+
 
 
 export default function Main() {
@@ -12,35 +14,43 @@ export default function Main() {
   const wins = parseInt(winsString, 10);
   const lossesString = localStorage.getItem('losses');
   const losses = parseInt(lossesString, 10);
+  const currentTime = moment().format("DD/MM/YYYY HH:mm");
+  const time = localStorage.getItem('lastUpdated');
 
   const aumentarWins = () => {
     setCountVic(countVic + 1);
     localStorage.setItem('wins', countVic + 1);
+    localStorage.setItem('lastUpdated', currentTime);
   }
 
   const diminuirWins = () => {
     setCountVic(countVic > 0 ? countVic - 1 : 0);
     localStorage.setItem('wins', countVic - 1);
+    localStorage.setItem('lastUpdated', currentTime);
   }
 
   const resetarWins = () => {
     setCountVic(0);
     localStorage.setItem('wins', 0);
+    localStorage.setItem('lastUpdated', currentTime);
   }
 
   const aumentarLosses = () => {
     setCountDer(countDer + 1);
     localStorage.setItem('losses', countDer + 1);
+    localStorage.setItem('lastUpdated', currentTime);
   }
 
   const diminuirLosses = () => {
     setCountDer(countDer > 0 ? countDer - 1 : 0);
     localStorage.setItem('losses', countDer - 1);
+    localStorage.setItem('lastUpdated', currentTime);
   }
 
   const resetarLosses = () => {
     setCountDer(0);
     localStorage.setItem('losses', 0);
+    localStorage.setItem('lastUpdated', currentTime);
   }
 
   useEffect(() => {
@@ -78,6 +88,7 @@ export default function Main() {
         </div>
       </main>
       <footer className="footer-container">
+        <p style={{ color: "white" }}>Last Updated: {time}</p>
         <p className="footer-line">Made by Pedro Freitas</p>
         <ul className="footer-link-container">
           <li className="footer-link">
